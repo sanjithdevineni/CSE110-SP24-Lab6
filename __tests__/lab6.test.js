@@ -27,12 +27,17 @@ describe('Basic user flow for Website', () => {
         return data = item.data;
       });
     });
-    console.log(`Checking product item 1/${prodItemsData.length}`);
-    // Make sure the title, price, and image are populated in the JSON
-    firstValue = prodItemsData[0];
-    if (firstValue.title.length == 0) { allArePopulated = false; }
-    if (firstValue.price.length == 0) { allArePopulated = false; }
-    if (firstValue.image.length == 0) { allArePopulated = false; }
+
+    console.log(`Checking ${prodItemsData.length} product items`);
+    // Iterate over each product item data
+    prodItemsData.forEach((itemData, index) => {
+        console.log(`Checking product item ${index + 1}/${prodItemsData.length}`);
+        // Make sure the title, price, and image are populated in the JSON
+        if (itemData.title.length == 0) { allArePopulated = false; }
+        if (itemData.price.length == 0) { allArePopulated = false; }
+        if (itemData.image.length == 0) { allArePopulated = false; }
+    });
+
     // Expect allArePopulated to still be true
     expect(allArePopulated).toBe(true);
 
@@ -63,6 +68,7 @@ describe('Basic user flow for Website', () => {
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
     // Once you have the button, you can click it and check the innerText property of the button.
     // Once you have the innerText property, use innerText.jsonValue() to get the text value of it
+    
   }, 2500);
 
   // Check to make sure that after clicking "Add to Cart" on every <product-item> that the Cart
